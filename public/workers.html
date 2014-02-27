@@ -1,0 +1,39 @@
+
+<html>
+<head>
+    <title>HTML5 : Workers</title>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <script src="/javascripts/log.js"></script>
+</head>
+<body>
+    <h1>Workers Example</h1>
+    <p>
+        This page starts any number of dedicated and shared web workers
+    </p>
+    <div>
+        <button onclick="startDedicatedWorker()">start dedicated worker</button><br/>
+    </div>
+    <div id="log"></div>
+    <script>
+        var workerId = 0;
+        function startDedicatedWorker() { 
+            workerId++;
+            log("Employer: Starting Dedicated Worker " + workerId);
+            var dw = new Worker('/javascripts/dedicated_worker.js');
+            dw.onmessage = function(message) { 
+                //console.log(message);
+                if(message.data.log !== undefined) { 
+                    log(message.data.log);
+                }
+                else { 
+                    log("Employer: Got Message: " + message.data);
+                }
+            }
+            var mesg = "hello world";
+            log("Employer: Instructing Worker with message " + mesg);
+            dw.postMessage({ id: workerId });
+            dw.postMessage({ message: mesg });
+        }
+    </script>
+</body>
+</html>

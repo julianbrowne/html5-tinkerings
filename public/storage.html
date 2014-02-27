@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>HTML5 : Storage</title>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <script src="/javascripts/log.js"></script>
+</head>
+<body>
+    <h1>Storage Example</h1>
+
+    <p>
+        This page stores some data locally in the browser for next time
+    </p>
+
+    <div>
+        <button onclick="localStorage.myStuff = 'hello world'; log('saved ' + localStorage.myStuff + ' to store');">save to store</button><br/>
+        <button onclick="log(localStorage.myStuff)">show store</button><br/>
+        <button onclick="delete localStorage.myStuff">empty store</button><br/>
+    </div>
+
+    <div id="log"></div>
+
+</body>
+</html>
